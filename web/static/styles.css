@@ -10,7 +10,7 @@ model-viewer#coinAnimation {
     height: 33% !important;
     aspect-ratio: 1/1;
     padding: 16px;
-    transition: all 1s;
+    transition: all 1s, margin-left .8s ease-out;
 }
 
 
@@ -52,7 +52,7 @@ div.monetText span.futuristic {
     white-space: nowrap;
     border-radius: 20px;
     font-size: 600%;
-    font-family: 'Tilt Neon', serif;
+    font-family: 'Tektur', serif;
     color: wheat;
     font-weight: 600;
     left: 12%;

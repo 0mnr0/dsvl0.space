@@ -12,6 +12,7 @@ async function onLoad() {
     symbols = dsvl0.splitBySymbols();
 
     async function dsvl0_text_show() {
+        spaceCoin.marginLeft = '-1.5%';
         dsvl0.phantom = false;
         const textWidth = dsvl0.realWidth;
         dsvl0.maxWidth = '0px';
@@ -38,7 +39,7 @@ async function onLoad() {
     runLater(dsvl0_text_show, (coinSpinAnimationLength/2)-450)
     await runLater(async () => {
         spaceCoin.transform = ' scale(1)'
-        await spinTo(1080, 532, coinSpinAnimationLength)
+        await spinTo(1080, 532, coinSpinAnimationLength);
     }, 100)
 }
 
