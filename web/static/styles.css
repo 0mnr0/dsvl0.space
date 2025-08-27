@@ -5,9 +5,9 @@ html {
 }
 
 model-viewer#coinAnimation {
-    transform: scale(1);
-    width: 33% !important;
-    height: 33% !important;
+    transform: translate(0px, 0%) scale(0);
+    width: 50% !important;
+    height: 50% !important;
     aspect-ratio: 1/1;
     padding: 16px;
     transition: all 1s, margin-left .8s ease-out;
@@ -25,6 +25,10 @@ model-viewer::part(default-progress-bar) {
     display: none;
 }
 
+.svg-chroma{
+    font: 800 64px/1.1 system-ui, sans-serif;
+    filter: url(#chromatic);
+}
 
 body {
     background: black;
@@ -39,20 +43,26 @@ body {
 }
 
 div.monetText {
+    width: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0px);
     height: 100%;
     display: flex;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
 }
 
 
-div.monetText span.futuristic {
+div.monetText span#authorText {
+    max-height: 144px;
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
     border-radius: 20px;
-    font-size: 600%;
     font-family: 'Tektur', serif;
+    margin-right: -4px;
     color: wheat;
     font-weight: 600;
     left: 12%;
@@ -61,7 +71,38 @@ div.monetText span.futuristic {
 }
 
 
-div.monetText span.futuristic span {
+div.monetText span#authorText span {
     display: inline-block;
     transition: all .5s;
+}
+
+
+div.monetText.minified {
+    transition: all 1s, height .65s;
+    height: 144px;
+    left: 0;
+    transform: translate(0px, 0px);
+}
+
+div.monetText.minified > span#authorText {
+    left: 0;
+    margin-right: -24px;
+}
+
+
+div.monetText.minified > model-viewer#coinAnimation {
+    padding-left: 0px;
+    transition: all 1s, margin-left .8s ease-out;
+    transform: scale(0.66) !important;
+    width: 140px !important;
+    height: 140px !important;
+}
+
+div.siteIntro {
+    padding: 0px 48px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }

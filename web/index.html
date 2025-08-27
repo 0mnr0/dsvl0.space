@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>DSVL0.SPACE</title>
@@ -21,17 +21,46 @@
 
 <body>
 
-<div class="monetText">
-    <span class="futuristic" id="authorText">DSVL</span>
-    <model-viewer src="static/coin.glb"
-                  id="coinAnimation"
-                  alt="3D coin"
-                  camera-orbit="97deg 0deg 0deg"
-                  style="width: 300px; height: 300px;">
-    </model-viewer>
-</div>
+    <div class="siteIntro">
+        <div class="monetText">
+            <span id="authorText">DSVL</span>
+            <model-viewer src="static/coin.glb"
+                          id="coinAnimation"
+                          alt="3D coin"
+                          onload="document.coinLoaded = true;"
+                          camera-orbit="97deg 0deg 0deg"
+                          style="width: 300px; height: 300px;">
+            </model-viewer>
+        </div>
+    </div>
 
-</script>
+    <svg width="0" height="0" style="position:absolute">
+        <filter id="chromatic">
+            <!-- 3 слоя: R, G, B -->
+            <feFlood flood-color="#f00" result="red"/>
+            <feFlood flood-color="#0f0" result="green"/>
+            <feFlood flood-color="#00f" result="blue"/>
+
+            <!-- вырезаем форму исходного контента -->
+            <feComposite in="red"   in2="SourceGraphic" operator="in" result="r"/>
+            <feComposite in="green" in2="SourceGraphic" operator="in" result="g"/>
+            <feComposite in="blue"  in2="SourceGraphic" operator="in" result="b"/>
+
+            <!-- смещения каналов -->
+            <feOffset in="r" dx="2"  dy="0"  result="r2"/>
+            <feOffset in="g" dx="-2" dy="0"  result="g2"/>
+            <feOffset in="b" dx="0"  dy="1"  result="b2"/>
+
+            <!-- склеиваем слои с исходником -->
+            <feMerge>
+                <feMergeNode in="r2"/>
+                <feMergeNode in="g2"/>
+                <feMergeNode in="b2"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </svg>
+
 
 </body>
 </html>

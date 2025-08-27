@@ -5,14 +5,19 @@ random = (min, max) => {
     return Math.floor(Math.random() * (Math.floor(max) - min + 1)) + min;
 }
 
+function SetCoinProviderSize(size){
+    RemoveStyle("fontCoinProvider");
+    CreateStyle("fontCoinProvider", `div.monetText span#authorText, div.monetText span#authorText span { font-size: ${size}px; }`);
+}
+
 
 async function onLoad() {
+    SetCoinProviderSize(96);
     const dsvl0 = find('div.monetText span#authorText');
     dsvl0.phantom = true;
     symbols = dsvl0.splitBySymbols();
 
-    async function dsvl0_text_show() {
-        spaceCoin.marginLeft = '-1.5%';
+    async function dsvl0_text_show(){
         dsvl0.phantom = false;
         const textWidth = dsvl0.realWidth;
         dsvl0.maxWidth = '0px';
@@ -30,15 +35,19 @@ async function onLoad() {
             }, 100);
             await sleep(30);
         }
+        await sleep(1000);
+        SetCoinProviderSize(64);
+        dsvl0.parentElement.classList.add("minified");
+
     }
 
     spaceCoin = find('#coinAnimation')
-    spaceCoin.makeZeroAnimation(() => { spaceCoin.transform = ' scale(0)' }, 'transform', 10)
+    spaceCoin.makeZeroAnimation(() => { spaceCoin.transform = 'translate(0px, 200%) scale(0.5)' }, 'transform', 10)
     spaceCoin.opacity = 1;
-    runLater(async() => {spaceCoin.transform = ' scale(0.33)'}, 950)
+    runLater(async() => {spaceCoin.transform = 'translate(0px, 0px) scale(0.33)'}, 950)
     runLater(dsvl0_text_show, (coinSpinAnimationLength/2)-450)
     await runLater(async () => {
-        spaceCoin.transform = ' scale(1)'
+        spaceCoin.transform = 'translate(0px, 0px) scale(1)'
         await spinTo(1080, 532, coinSpinAnimationLength);
     }, 100)
 }
@@ -53,4 +62,10 @@ function GradientAnimator(){
 
 
 
-window.addEventListener('load', onLoad)
+window.addEventListener('load', async () => {
+    for (let i = 0; i < 25*150; i++) {
+        if (document.coinLoaded) {continue}
+        await sleep(25)
+    }
+    onLoad();
+})
