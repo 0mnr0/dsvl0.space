@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <link rel="stylesheet" href="static/styles.css">
     <script src="static/LightCore.js" defer></script>
+    <script src="static/chromaFilter.js" defer></script>
     <script async src="static/coin.js" defer></script>
     <script async src="static/index.js" defer></script>
 
@@ -33,33 +34,6 @@
             </model-viewer>
         </div>
     </div>
-
-    <svg width="0" height="0" style="position:absolute">
-        <filter id="chromatic">
-            <!-- 3 слоя: R, G, B -->
-            <feFlood flood-color="#f00" result="red"/>
-            <feFlood flood-color="#0f0" result="green"/>
-            <feFlood flood-color="#00f" result="blue"/>
-
-            <!-- вырезаем форму исходного контента -->
-            <feComposite in="red"   in2="SourceGraphic" operator="in" result="r"/>
-            <feComposite in="green" in2="SourceGraphic" operator="in" result="g"/>
-            <feComposite in="blue"  in2="SourceGraphic" operator="in" result="b"/>
-
-            <!-- смещения каналов -->
-            <feOffset in="r" dx="2"  dy="0"  result="r2"/>
-            <feOffset in="g" dx="-2" dy="0"  result="g2"/>
-            <feOffset in="b" dx="0"  dy="1"  result="b2"/>
-
-            <!-- склеиваем слои с исходником -->
-            <feMerge>
-                <feMergeNode in="r2"/>
-                <feMergeNode in="g2"/>
-                <feMergeNode in="b2"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </svg>
 
 
 </body>
