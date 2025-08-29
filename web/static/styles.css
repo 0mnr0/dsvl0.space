@@ -106,3 +106,60 @@ div.siteIntro {
     left: 0;
     width: 100%;
 }
+
+
+.none {
+    display: none;
+}
+
+.drowned {
+    z-index: -100;
+    opacity: 0;
+}
+
+
+.PinnedContacts {
+    position: absolute;
+    height: 40px;
+    width: 80px;
+    right: 20px;
+    top: 20px;
+    padding: 5px 2px;
+    display: flex;
+    z-index: 22;
+    opacity: 1;
+    backdrop-filter: blur(16px) brightness(1);
+    border-radius: 100px;
+    transition: all .8s, z-index 0s;
+}
+
+.PinnedContacts.visible.topSite {
+    top: 60px;
+    right: 60px;
+}
+
+.PinnedContacts.visible {
+    backdrop-filter: blur(16px) brightness(0.6);
+}
+
+.PinnedContacts img {
+    aspect-ratio: 1/1;
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.2;
+    top: -100px;
+    position: relative;
+}
+
+
+.PinnedContacts img.show {
+    top: 0;
+    cursor: pointer;
+    opacity: 1;
+    transition: all 2s;
+}
+
+.PinnedContacts img.show:hover {
+    transform: rotateX(180deg) rotateY(360deg) rotateZ(180deg);
+}

@@ -10,8 +10,12 @@ function SetCoinProviderSize(size){
     CreateStyle("fontCoinProvider", `div.monetText span#authorText, div.monetText span#authorText span { font-size: ${size}px; }`);
 }
 
+function ScrollCodeFeatures(event) {
+    log(event)
+}
 
 async function onLoad() {
+    document.addEventListener('scroll', ScrollCodeFeatures)
     SetCoinProviderSize(96);
     const dsvl0 = find('div.monetText span#authorText');
     dsvl0.phantom = true;
@@ -38,7 +42,12 @@ async function onLoad() {
         await sleep(1000);
         SetCoinProviderSize(64);
         dsvl0.parentElement.classList.add("minified");
-
+        const PinnedContacts = find('div.PinnedContacts'); PinnedContacts.classList.add("visible");
+        LocalStorage.save("introExecuted", true);
+        for (const img of PinnedContacts.findAll('img')) {
+            img.classList.add("show");
+            await sleep(100);
+        }
     }
 
     spaceCoin = find('#coinAnimation')
